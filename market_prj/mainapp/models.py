@@ -1,4 +1,3 @@
-
 from django.db import models
 
 
@@ -9,7 +8,6 @@ class ListOfCountries(models.Model):
 
     def __str__(self):
         return self.name
-
 
 
 class Regions(models.Model):
