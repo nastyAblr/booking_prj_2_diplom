@@ -1,0 +1,40 @@
+{% extends "mainapp/base.html" %}
+{% load static %}
+
+
+{% block title %}{{ accommodation.name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <!-- Изображение размещения -->
+        <div class="col-md-6">
+            {% if accommodation.image %}
+                <img src="{{ accommodation.image.url }}" class="img-fluid rounded" alt="{{ accommodation.name }}">
+            {% else %}
+                <img src="{% static 'mainapp/images/default.jpg' %}" class="img-fluid rounded" alt="{{ accommodation.name }}">
+            {% endif %}
+        </div>
+
+        <!-- Информация о размещении -->
+        <div class="col-md-6">
+            <h2>{{ accommodation.name }}</h2>
+            <p><strong>Страна:</strong> {{ accommodation.country.name }}</p>
+            <p><strong>Регион:</strong> {{ accommodation.region.name }}</p>
+            <p><strong>Краткое описание:</strong> {{ accommodation.short_desc }}</p>
+            <p><strong>Описание:</strong> {{ accommodation.description }}</p>
+            <p><strong>Краткое описание комнаты:</strong> {{ accommodation.room_desc }}</p>
+            <p><strong>Свободных номеров:</strong> {{ accommodation.availability }}</p>
+            <p><strong>Цена за ночь:</strong> {{ accommodation.price }} ₽</p>
+
+            {% if accommodation.availability > 0 %}
+                <a href="#" class="btn btn-success mt-3">Забронировать</a>
+            {% else %}
+                <span class="badge bg-danger mt-3">Нет доступных мест</span>
+            {% endif %}
+
+            <a href="{% url 'mainapp:accommodations' %}" class="btn btn-secondary mt-3">Назад к списку</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

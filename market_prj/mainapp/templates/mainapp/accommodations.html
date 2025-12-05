@@ -1,5 +1,5 @@
 
-{% extends "base.html" %}
+{% extends "mainapp/base.html" %}
 {% load static %}
 
 {% block title %}Размещение{% endblock %}
@@ -7,48 +7,24 @@
 {% block content %}
 <div class="container mt-4">
     <h1 class="mb-4">Наши варианты размещения</h1>
-
     <div class="row row-cols-1 row-cols-md-3 g-4">
-
-        <!-- Карточка 1 -->
+        {% for obj in accommodations %}
         <div class="col">
             <div class="card h-100">
-                <img src="{% static 'mainapp/images/hotel1.jpg' %}" class="card-img-top" alt="Hotel 1">
+                {% if obj.image %}
+                <img src="{{ obj.image.url }}" class="card-img-top" alt="{{ obj.name }}">
+                {% else %}
+                <img src="{% static 'mainapp/images/default.jpg' %}" class="card-img-top" alt="{{ obj.name }}">
+                {% endif %}
                 <div class="card-body">
-                    <h5 class="card-title">Отель у моря</h5>
-                    <p class="card-text">
-                        Просторные номера, отличный сервис и вид на море.
-                    </p>
+                    <h5 class="card-title">{{ obj.name }}</h5>
+                    <p class="card-text">{{ obj.short_desc }}</p>
+                    <p class="card-text">Цена: {{ obj.price }} ₽</p>
+                    <a href="{% url 'mainapp:accommodation' pk=obj.id %}" class="btn btn-primary">Подробнее</a>
                 </div>
             </div>
         </div>
-
-        <!-- Карточка 2 -->
-        <div class="col">
-            <div class="card h-100">
-                <img src="{% static 'mainapp/images/hotel2.jpg' %}" class="card-img-top" alt="Hotel 2">
-                <div class="card-body">
-                    <h5 class="card-title">Горный курорт</h5>
-                    <p class="card-text">
-                        Идеально для тех, кто любит активный отдых и свежий воздух.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Карточка 3 -->
-        <div class="col">
-            <div class="card h-100">
-                <img src="{% static 'mainapp/images/hotel3.jpg' %}" class="card-img-top" alt="Hotel 3">
-                <div class="card-body">
-                    <h5 class="card-title">Городской отель</h5>
-                    <p class="card-text">
-                        Современные номера и близость ко всем городским достопримечательностям.
-                    </p>
-                </div>
-            </div>
-        </div>
-
+        {% endfor %}
     </div>
 </div>
 {% endblock %}

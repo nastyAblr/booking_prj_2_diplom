@@ -9,6 +9,10 @@ class ListOfCountries(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'Страна'
+        verbose_name_plural = 'Страны'
+        ordering = ['name']
 
 class Regions(models.Model):
     country = models.ForeignKey(ListOfCountries, on_delete=models.CASCADE)
@@ -21,6 +25,9 @@ class Regions(models.Model):
 
     class Meta:
         unique_together = ('country', 'name')
+        verbose_name = 'Регион'
+        verbose_name_plural = 'Регионы'
+        ordering = ['country', 'name']
 
 
 class Accommodation(models.Model):
@@ -43,6 +50,6 @@ class Accommodation(models.Model):
         return f'{self.name} ({self.country.name})'
 
     class Meta:
-        verbose_name = 'проживание'
-        verbose_name_plural = 'проживания'
+        verbose_name = 'отель'
+        verbose_name_plural = 'отели'
         unique_together = ('region', 'name')
