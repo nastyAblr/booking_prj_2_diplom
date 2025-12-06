@@ -1,4 +1,4 @@
-{% extends "mainapp/base.html" %}
+{% extends "base.html" %}
 {% load static %}
 
 
@@ -12,7 +12,8 @@
             {% if accommodation.image %}
                 <img src="{{ accommodation.image.url }}" class="img-fluid rounded" alt="{{ accommodation.name }}">
             {% else %}
-                <img src="{% static 'mainapp/images/default.jpg' %}" class="img-fluid rounded" alt="{{ accommodation.name }}">
+                <img src="{% static 'mainapp/images/default.jpg' %}" class="img-fluid rounded"
+                     alt="{{ accommodation.name }}">
             {% endif %}
         </div>
 

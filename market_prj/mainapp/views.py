@@ -5,7 +5,7 @@ def main(request):
     # Можно выводить, например, последние 3 размещения на главной
      latest_accommodations = Accommodation.get_items()[:3]
      return render(request, 'mainapp/index.html', {'latest_accommodations': latest_accommodations})
-    #return render(request, 'mainapp/index.html')
+
 
 
 def accommodations(request):

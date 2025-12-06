@@ -1,20 +1,11 @@
 from django.urls import path
-
-from authapp import views
+from authapp import views as authapp  # подключаем views
 
 app_name = 'authapp'
 
 urlpatterns = [
-    path('login/', views.login_view, name='login'),
-    path('logout/', views.logout, name='logout'),
-    path('register/', views.register, name='register'),
-    path('edit/', views.edit, name='edit'),
-
-    # восстановление пароля
-    path('password-reset/', views.TravelPasswordResetView.as_view(), name='password_reset'),
-    path('password-reset/done/', views.TravelPasswordResetDoneView.as_view(), name='password_reset_done'),
-    path('password-reset/<uidb64>/<token>/', views.TravelPasswordResetConfirmView.as_view(),
-         name='password_reset_confirm'),
-    path('password-reset/complete/', views.TravelPasswordResetCompleteView.as_view(),
-         name='password_reset_complete'),
+    path('login/', authapp.login_view, name='login'),
+    path('logout/', authapp.logout, name='logout'),
+    path('register/', authapp.register, name='register'),
+    path('edit/', authapp.edit, name='edit'),
 ]
